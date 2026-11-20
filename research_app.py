@@ -188,7 +188,7 @@ def paint_history():
     if not conversation_id:
         st.markdown("조사하고 싶은 주제를 입력해 보세요. 위키피디아와 DuckDuckGo에서 찾아 정리하고 파일로 저장합니다.")
         return
-    for item in client.conversations.items.list(conversation_id, order="acs", limit=100):
+    for item in client.conversations.items.list(conversation_id, order="asc", limit=100):
         if item.type == "message" and item.role in ("user", "assistant"):
             text = "".join(getattr(part, "text", "") or "" for part in item.content)
             with st.chat_message("human" if item.role == "user" else "ai"):
